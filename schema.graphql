@@ -1,0 +1,43 @@
+type Query {
+  doctor(name: String!): Doctor
+}
+
+type Mutation {
+    bookAppointment(input: BookAppointmentInput!): Event
+    cancelAppointment(input: CancelAppointmentInput!): Boolean
+    updateAppointment(input: UpdateAppointmentInput!): Event
+}
+
+input BookAppointmentInput {
+    doctorName: String!
+    patientName: String!
+}
+
+input CancelAppointmentInput {
+    doctorName: String!
+    patientName: String!
+}
+
+input UpdateAppointmentInput {
+    oldName: String!
+    newName: String!
+}
+
+type Doctor {
+	id: ID!
+	doctorName: String
+	clinicNname: String
+	specialty: String
+    calendar: Calendar
+}
+
+type Calendar {
+	id: ID!
+	timeSlots: Int
+    events: [Event]
+}
+
+type Event {
+	id: ID!
+	patientName: String
+}
